@@ -1,8 +1,11 @@
 import React from 'react'
 import Header from './Header'
 import LoginForm from './LoginForm'
+//import { checkValidateForm, checkValidateForm } from '../utils/validate'
 
 const Login = () => {
+
+  
   return (
     <div>
       <Header/>
