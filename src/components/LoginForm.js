@@ -1,6 +1,10 @@
 import React, { useRef, useState } from 'react'
 import {checkValidateForm} from '../utils/validate';
 
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";//Import it from firebase docs
+
+import { auth } from '../utils/firebase';// using common auth from firebase.js
+
 const LoginForm = () => {
 
     const [isSignInForm, setIsSignInForm]=useState(true);
@@ -22,6 +26,50 @@ const LoginForm = () => {
       const message=checkValidateForm(email1.current.value, password1.current.value);
       console.log(message);
       setOutput(message);
+      if (message) return;// message is there then function should stop and return from here.
+      //OR if(message===null){Write sign in and sing up logic here}
+      //OR if(!message){Write sign in and sing up logic here}
+
+      //Now we will write sign in and sign up logic here.
+
+      if(!isSignInForm){
+        //Sign UP logic from firebase docs nothing fancy.
+        createUserWithEmailAndPassword(auth, email1.current.value, password1.current.value)
+        .then((userCredential) => {
+          // Signed up 
+          const user = userCredential.user;//it will give user object, if it is success
+            console.log(user);
+
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          console.log(errorCode, errorMessage);
+          // ..
+        });
+  
+      }
+      else{
+        //Sign In logic using access token and setup the cookies.
+
+        signInWithEmailAndPassword(auth, email1.current.value, password1.current.value)
+        .then((userCredential) => {
+    // Signed in 
+        const user = userCredential.user;
+        console.log(user);
+    // ...
+        })
+       .catch((error) => {
+       const errorCode = error.code;
+       const errorMessage = error.message;
+       console.log(errorCode, errorMessage);
+        });
+
+
+      }
+
     }
   return (
     <div>
