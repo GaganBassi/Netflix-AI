@@ -4,17 +4,18 @@ import {checkValidateForm} from '../utils/validate';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";//Import it from firebase docs
 
 import { auth } from '../utils/firebase';// using common auth from firebase.js
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
 
     const [isSignInForm, setIsSignInForm]=useState(true);
-
+    const navigate=useNavigate();
     
 
     const email1=useRef(null);
     const password1=useRef(null);
    // const message=useRef('Gagan');
-   const [output, setOutput]=useState('');
+   const [outputError, setOutputError]=useState('');
 
     const toggleSignIn=()=>{
         setIsSignInForm(!isSignInForm);
@@ -25,7 +26,7 @@ const LoginForm = () => {
 
       const message=checkValidateForm(email1.current.value, password1.current.value);
       console.log(message);
-      setOutput(message);
+      setOutputError(message);
       if (message) return;// message is there then function should stop and return from here.
       //OR if(message===null){Write sign in and sing up logic here}
       //OR if(!message){Write sign in and sing up logic here}
@@ -39,14 +40,18 @@ const LoginForm = () => {
           // Signed up 
           const user = userCredential.user;//it will give user object, if it is success
             console.log(user);
+            navigate("/Browse")
+          
 
           // ...
+
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
 
           console.log(errorCode, errorMessage);
+          setOutputError(errorCode+errorMessage)
           // ..
         });
   
@@ -59,11 +64,13 @@ const LoginForm = () => {
     // Signed in 
         const user = userCredential.user;
         console.log(user);
+        navigate("/Browse")
     // ...
         })
        .catch((error) => {
        const errorCode = error.code;
        const errorMessage = error.message;
+       setOutputError(errorCode+errorMessage)
        console.log(errorCode, errorMessage);
         });
 
@@ -86,7 +93,7 @@ const LoginForm = () => {
         <input type='password' ref={password1}
         placeholder='Password' className='p-4 my-4 w-full bg-gray-300'/>
         <button className='p-4 my-6 bg-red-700 w-full rounded-lg' onClick={validate}>{isSignInForm? "Sign In":"Sign Up"}</button>
-        <p className='text-red-500 font-bold text-lg p-2'>{output}</p>
+        <p className='text-red-500 font-bold text-lg p-2'>{outputError}</p>
         <p className='py-4 cursor-pointer' onClick={toggleSignIn}>{isSignInForm? "New to Netflix? Sign up now.":"Already user? Click to Login"}</p>
       </form>
     </div>
