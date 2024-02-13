@@ -27,7 +27,7 @@ const Header = () => {
 
   useEffect(()=>{
     //Whenver user SignIn/ Sign Up / Sign Out this API call happen.
-    onAuthStateChanged(auth, (user) => {
+    const unSubscribe=onAuthStateChanged(auth, (user) => {
         if (user) {
           // User is signed in, see docs for a list of available properties
           // https://firebase.google.com/docs/reference/js/auth.user
@@ -53,6 +53,8 @@ const Header = () => {
           //if user is not logged In always redirect to Login page.
         }
       });
+
+      return ()=>unSubscribe();//Unmount or unsubscribe the onAuthStateChanged function
 
 },[])
   return (
