@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Header from './Header';
 import { auth } from '../utils/firebase';
 
 import { API_OPTIONS } from '../utils/constant';
+import { addNowPlayingMovies } from '../utils/movieSlice';
 
 const Browse = () => {
+
+
+  const dispatch=useDispatch();
 
 //Fetching of an API from TMDB
   const getNowPlayingMovies= async()=>{
@@ -13,6 +17,7 @@ const Browse = () => {
     //API options coming from constant file and it has the info of API key and token
     const json=await data.json();
     console.log(json.results);
+    dispatch(addNowPlayingMovies(json.results));
   }
   useEffect(()=>{
     getNowPlayingMovies();
