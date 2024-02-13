@@ -7,6 +7,8 @@ import { onAuthStateChanged } from 'firebase/auth'
 
 import { addUser, removeUser } from '../utils/userSlice'
 
+import { logo } from '../utils/constant';
+
 const Header = () => {
 
   
@@ -55,11 +57,13 @@ const Header = () => {
       });
 
       return ()=>unSubscribe();//Unmount or unsubscribe the onAuthStateChanged function
+      //because useEffect here runs once while initial rendering but Header component might render multiple times
+      //which results in call of useEffect func as well multiple times, so to avoid this, its better to unmount/ Unsubscribe.
 
 },[])
   return (
     <div className='absolute px-8 py-2 w-screen bg-gradient-to-b from-black  z-10 flex justify-between'>
-      <img className="w-40" src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png" 
+      <img className="w-40" src={logo}
       alt="Something Went Wrong"/>
 
       { auth?.currentUser && <div className='flex'>
