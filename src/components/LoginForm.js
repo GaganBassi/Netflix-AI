@@ -1,19 +1,23 @@
 import React, { useRef, useState } from 'react'
 import {checkValidateForm} from '../utils/validate';
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";//Import it from firebase docs
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";//Import it from firebase docs
 
 import { auth } from '../utils/firebase';// using common auth from firebase.js
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
 
 const LoginForm = () => {
 
+    const dispatch=useDispatch();
     const [isSignInForm, setIsSignInForm]=useState(true);
     const navigate=useNavigate();
     
 
     const email1=useRef(null);
     const password1=useRef(null);
+    const fullName=useRef(null);
    // const message=useRef('Gagan');
    const [outputError, setOutputError]=useState('');
 
@@ -40,7 +44,24 @@ const LoginForm = () => {
           // Signed up 
           const user = userCredential.user;//it will give user object, if it is success
             console.log(user);
-            navigate("/Browse")
+            //console.log('Auth',auth);
+            updateProfile(user, {
+              displayName: fullName.current.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
+             //user will not update but auth.currentUser has all the latest values.
+            }).then(() => {
+              // Profile updated!
+              // ...
+              const {uid, email, displayName}=auth.currentUser;
+              dispatch(addUser({uid:uid, email:email, displayName:displayName}));//No need by the way to do this step,
+              // if we are using auth.currentUser
+              navigate("/Browse")//once the profile get updated then navigate.
+            }).catch((error) => {
+              // An error occurred
+              // ...
+            });
+            
+
+
           
 
           // ...
@@ -64,6 +85,21 @@ const LoginForm = () => {
     // Signed in 
         const user = userCredential.user;
         console.log(user);
+       /* updateProfile(user, {
+          displayName: fullName.current.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
+        }).then(() => {
+          // Profile updated!
+          // ...
+        }).catch((error) => {
+          // An error occurred
+          // ...
+        });*/
+        
+
+              
+              
+
+        
         navigate("/Browse")
     // ...
         })
@@ -86,7 +122,7 @@ const LoginForm = () => {
       }} className='w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-75' >
         <h1 className='font-bold text-3xl py-4'>{isSignInForm? "Sign In":"Sign Up"}</h1>
 
-        {isSignInForm===false&&<input type='text' placeholder='Full Name' className='p-4 my-4 w-full bg-gray-300'/>}
+        {isSignInForm===false&&<input type='text' ref={fullName} placeholder='Full Name' className='p-4 my-4 w-full bg-gray-300'/>}
         {/**Claiming above mentioned reference here of email and password */}
         <input type='text' ref={email1}
         placeholder='Email Address' className='p-4 my-4 w-full bg-gray-300'/>
