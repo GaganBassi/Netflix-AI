@@ -54,7 +54,7 @@ const LoginForm = () => {
               const {uid, email, displayName}=auth.currentUser;
               dispatch(addUser({uid:uid, email:email, displayName:displayName}));//No need by the way to do this step,
               // if we are using auth.currentUser
-              navigate("/Browse")//once the profile get updated then navigate.
+              //navigate("/Browse")//once the profile get updated then navigate.
             }).catch((error) => {
               // An error occurred
               // ...
@@ -99,8 +99,13 @@ const LoginForm = () => {
               
               
 
-        
-        navigate("/Browse")
+        /**console.log('Testing');
+        console.log("1",auth.currentUser);
+        console.log("2", user);
+        if(auth.currentUser=user){
+          console.log("Same");
+        }**/
+        //navigate("/Browse")
     // ...
         })
        .catch((error) => {

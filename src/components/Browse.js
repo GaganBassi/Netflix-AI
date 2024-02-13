@@ -6,12 +6,15 @@ import { auth } from '../utils/firebase';
 
 const Browse = () => {
 
+  const selector=useSelector((store)=>{return store.user})
+
   //const selector=useSelector((store)=>{return store.user});
 
   //console.log(selector.email);
   console.log('Hello');
-  console.log(auth?.currentUser?.email);
+  console.log(selector?.email);
   console.log(auth?.currentUser?.displayName);
+ 
   //console.log(auth.currentUser.email);
   return (
     <div>
