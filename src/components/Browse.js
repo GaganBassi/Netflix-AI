@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import Header from './Header';
 import { auth } from '../utils/firebase';
 import useNowPlayingMovies from '../hooks/useNowPlayingMovies';
+import MainContainer from './MainContainer';
+import SecondaryContainer from './SecondaryContainer';
 
 const Browse = () => {
 
@@ -18,12 +20,23 @@ const Browse = () => {
   console.log('Hello');
   console.log(selector?.email);
   console.log(auth?.currentUser?.displayName);
+
+
  
   //console.log(auth.currentUser.email);
   return (
     <div>
       <Header/>
-        Browse
+      {/* Outline of the browse page
+        Main Container
+            -Video background
+            -Video Title
+        Secondary Container
+            -Movie List *n
+            -cards*n
+      */}
+    <MainContainer/>
+    <SecondaryContainer/>
     </div>
   )
 }
