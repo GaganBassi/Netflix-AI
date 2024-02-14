@@ -5,12 +5,21 @@ import { auth } from '../utils/firebase';
 import useNowPlayingMovies from '../hooks/useNowPlayingMovies';
 import MainContainer from './MainContainer';
 import SecondaryContainer from './SecondaryContainer';
+import usePopularMovies from '../hooks/usePopularMovies';
+import useUpcomingVideo from '../hooks/useUpcomingVideo';
+import useTrendingMovies from '../hooks/useTrendingMovies';
+
 
 const Browse = () => {
 
   //Moving the fetch code to custom Hook (useNowPlayingMovies.js)
 
   useNowPlayingMovies();//fetching of API and pushing data to redux store 
+  usePopularMovies();
+  useUpcomingVideo();
+  useTrendingMovies();
+  
+  console.log("test1")
   
   const selector=useSelector((store)=>{return store.user})
 
