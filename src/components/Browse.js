@@ -8,6 +8,8 @@ import SecondaryContainer from './SecondaryContainer';
 import usePopularMovies from '../hooks/usePopularMovies';
 import useUpcomingVideo from '../hooks/useUpcomingVideo';
 import useTrendingMovies from '../hooks/useTrendingMovies';
+//import GptSearch from './GptMain';
+import GptMain from './GptMain';
 
 
 const Browse = () => {
@@ -30,12 +32,16 @@ const Browse = () => {
   console.log(selector?.email);
   console.log(auth?.currentUser?.displayName);
 
-
+  const gptStatus=useSelector((store)=>{return store.gpt.showGpt});
  
   //console.log(auth.currentUser.email);
   return (
     <div>
       <Header/>
+      {gptStatus ?<GptMain/>:<>
+      <MainContainer/>
+    <SecondaryContainer/>
+      </>}
       {/* Outline of the browse page
         Main Container
             -Video background
@@ -44,8 +50,7 @@ const Browse = () => {
             -Movie List *n
             -cards*n
       */}
-    <MainContainer/>
-    <SecondaryContainer/>
+   
     </div>
   )
 }

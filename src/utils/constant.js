@@ -11,4 +11,6 @@ export const API_OPTIONS = {
 
   //Writing the image URL of TMDB 
 
-export const IMG_CDN_URL="https://image.tmdb.org/t/p/w500"
+export const IMG_CDN_URL="https://image.tmdb.org/t/p/w500";
+
+export const IMG_Login_Back="https://assets.nflxext.com/ffe/siteui/vlv3/5e16108c-fd30-46de-9bb8-0b4e1bbbc509/f5106312-05b7-4d50-8160-9f28090c28c0/CA-en-20240205-popsignuptwoweeks-perspective_alpha_website_medium.jpg";

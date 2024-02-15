@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import LoginForm from './LoginForm'
+import { IMG_Login_Back } from '../utils/constant'
 //import { checkValidateForm, checkValidateForm } from '../utils/validate'
 
 const Login = () => {
@@ -10,7 +11,7 @@ const Login = () => {
     <div>
       <Header/>
       <div className='absolute'>
-        <img src="https://assets.nflxext.com/ffe/siteui/vlv3/5e16108c-fd30-46de-9bb8-0b4e1bbbc509/f5106312-05b7-4d50-8160-9f28090c28c0/CA-en-20240205-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
+        <img src= {IMG_Login_Back}
          alt="Background Image Loading."/>
          {/** Having Background image of Netflix */}
     
