@@ -17,6 +17,7 @@ const Header = () => {
   
   const dispatch=useDispatch();
   const selector=useSelector((store)=>{return store.user})
+  const showGpt=useSelector((store)=>{return store.gpt.showGpt})
   
   const navigate=useNavigate();
   const handleSignOut=()=>{
@@ -79,13 +80,13 @@ const handleLanguageChange=(e)=>{
       { auth?.currentUser && <div className='flex'>
 
         {/**Dropdown using map function */}
-        <select onChange={handleLanguageChange} className='p-3 m-1 bg-transparent text-white'>
+        {showGpt && <select onChange={handleLanguageChange} className='p-3 m-1  bg-gray-900 opacity-70 text-white '>
           {supportedLanguages.map((language)=>{
             return(<option key={language.identifier} value={language.identifier}>{language.name}</option>)
           })}
           
-        </select>
-      <button onClick={handleGptSearchClick} className='py-2 h-12 px-4 mx-4 bg-purple-800 text-white rounded-lg my-1 hover:cursor-pointer'>GPT Search</button>
+        </select>}
+      <button onClick={handleGptSearchClick} className='py-2 h-12 px-4 mx-4 bg-purple-800 text-white rounded-lg my-1 hover:cursor-pointer'>{showGpt===false?"GPT Search":"Netflix"}</button>
         <img className='w-12 h-12 p-2' alt ="User icon" src="https://occ-0-7328-1001.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXz4LMjJFidX8MxhZ6qro8PBTjmHbxlaLAbk45W1DXbKsAIOwyHQPiMAuUnF1G24CLi7InJHK4Ge4jkXul1xIW49Dr5S7fc.png?r=e6eRequest Method:GET"/>
         <button onClick={handleSignOut} className='font-bold text-white'>{auth?.currentUser?.displayName}</button>
       </div>}

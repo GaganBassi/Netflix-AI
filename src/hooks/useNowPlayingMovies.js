@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constant";
 import { addNowPlayingMovies } from "../utils/movieSlice";
 import { useEffect } from "react";
@@ -6,6 +6,7 @@ import { useEffect } from "react";
 const useNowPlayingMovies=()=>{
 
     const dispatch=useDispatch();
+    const nowPlayingMovies=useSelector((store)=>store.movies.nowPlayingMovies);
 
 //Fetching of an API from TMDB
   const getNowPlayingMovies= async()=>{
@@ -16,7 +17,8 @@ const useNowPlayingMovies=()=>{
     dispatch(addNowPlayingMovies(json.results));
   }
   useEffect(()=>{
-    getNowPlayingMovies();
+    //if nowPlaying Movies empty then only fetch api this concept called Memorization.
+    !nowPlayingMovies && getNowPlayingMovies();
   },[])
 
 }

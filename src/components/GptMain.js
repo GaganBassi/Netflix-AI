@@ -9,7 +9,7 @@ const GptMain = () => {
     <div>
     
         
-      <div className='absolute -z-10'>
+      <div className='fixed -z-10'>
       
         <img src={IMG_Login_Back} alt="Background Image"/>
         

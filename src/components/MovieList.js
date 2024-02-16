@@ -17,7 +17,7 @@ const MovieList = (props) => {
             Important Concept if movies there then only run this.
   */}
            {
-           movies && movies.map((movie)=>{
+           movies && movies?.map((movie)=>{
 
             return(<MovieCard key={movie?.id} posterPath={movie?.poster_path}/>)
            }) 
