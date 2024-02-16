@@ -7,19 +7,22 @@ import { supportedLanguages } from '../utils/languageConstant'
 const GptMain = () => {
   return (
     <div>
-    
+      
         
       <div className='fixed -z-10'>
       
-        <img src={IMG_Login_Back} alt="Background Image"/>
+        <img className='h-screen object-cover' src={IMG_Login_Back} alt="Background Image"/>
         
+      </div>
+      <div className=''>
+      <GptSearchBar/>
+      <GptMovieSuggestions/>
       </div>
       {/* GPT Search
           GPT Movie Suggestions
       */}
        
-      <GptSearchBar/>
-      <GptMovieSuggestions/>
+      
     </div>
   )
 }

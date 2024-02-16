@@ -73,11 +73,16 @@ const handleLanguageChange=(e)=>{
   dispatch(changeLanguage(e.target.value));
 }
   return (
-    <div className='absolute px-8 py-2 w-screen bg-gradient-to-b from-black  z-10 flex justify-between'>
-      <img className="w-40" src={logo}
+    <div className='absolute px-8 py-2 w-screen bg-gradient-to-b from-black  z-10 flex justify-between bg-transparent
+    flex-col md:flex-row sm:flex-row'>
+      {/** here flex-col is default for smaller devices--small size devices.
+       * sm--tailwind for devices greater than smaller size---medium size devices.
+       * md--tailwind for devices greater than medium devices---larger size devices.
+       */}
+      <img className="w-40 mx-auto md:m-0 sm:mx-auto" src={logo}
       alt="Something Went Wrong"/>
 
-      { auth?.currentUser && <div className='flex'>
+      { auth?.currentUser && <div className='flex p-2 justify-between'>
 
         {/**Dropdown using map function */}
         {showGpt && <select onChange={handleLanguageChange} className='p-3 m-1  bg-gray-900 opacity-70 text-white '>
@@ -87,8 +92,8 @@ const handleLanguageChange=(e)=>{
           
         </select>}
       <button onClick={handleGptSearchClick} className='py-2 h-12 px-4 mx-4 bg-purple-800 text-white rounded-lg my-1 hover:cursor-pointer'>{showGpt===false?"GPT Search":"Netflix"}</button>
-        <img className='w-12 h-12 p-2' alt ="User icon" src="https://occ-0-7328-1001.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXz4LMjJFidX8MxhZ6qro8PBTjmHbxlaLAbk45W1DXbKsAIOwyHQPiMAuUnF1G24CLi7InJHK4Ge4jkXul1xIW49Dr5S7fc.png?r=e6eRequest Method:GET"/>
-        <button onClick={handleSignOut} className='font-bold text-white'>{auth?.currentUser?.displayName}</button>
+        <img className='w-12 h-12 p-2 hidden md:block ' alt ="User icon" src="https://occ-0-7328-1001.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXz4LMjJFidX8MxhZ6qro8PBTjmHbxlaLAbk45W1DXbKsAIOwyHQPiMAuUnF1G24CLi7InJHK4Ge4jkXul1xIW49Dr5S7fc.png?r=e6eRequest Method:GET"/>
+        <button onClick={handleSignOut} className='font-bold bg-white rounded-lg text-black'>{auth?.currentUser?.displayName}(Sign out)</button>
       </div>}
 
       

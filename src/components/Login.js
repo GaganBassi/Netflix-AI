@@ -11,7 +11,7 @@ const Login = () => {
     <div>
       <Header/>
       <div className='absolute'>
-        <img src= {IMG_Login_Back}
+        <img className='h-screen object-cover' src= {IMG_Login_Back}
          alt="Background Image Loading."/>
          {/** Having Background image of Netflix */}
     
