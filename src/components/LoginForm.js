@@ -84,7 +84,8 @@ const LoginForm = () => {
         .then((userCredential) => {
     // Signed in 
         const user = userCredential.user;
-        console.log(user);
+        console.log("User",user);
+        console.log("Auth",auth);
        /* updateProfile(user, {
           displayName: fullName.current.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
         }).then(() => {

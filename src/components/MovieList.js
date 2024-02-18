@@ -19,7 +19,7 @@ const MovieList = (props) => {
            {
            movies && movies?.map((movie)=>{
 
-            return(<MovieCard key={movie?.id} posterPath={movie?.poster_path}/>)
+            return(<MovieCard key={movie?.id} movieId={movie?.id} posterPath={movie?.poster_path}/>)
            }) 
            } 
         </div>

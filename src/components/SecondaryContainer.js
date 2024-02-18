@@ -8,6 +8,7 @@ const SecondaryContainer = () => {
   const popular=useSelector((store)=>{return(store?.movies?.popularMovies)});
   const upComing=useSelector((store)=>{return(store?.movies?.upComingMovies)});
   const trending=useSelector((store)=>{return(store?.movies?.trendingMovies)});
+  console.log("Trending",trending);
   return (
     <div className=' bg-black'>
       {
